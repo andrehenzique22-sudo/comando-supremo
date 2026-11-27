@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Comando Supremo · Painel de Compras</title>
+<style>
+:root{--bg:#0d0f10;--card:#17191b;--line:#2c2f31;--gold:#e9b949;--gold2:#f6d77c;--txt:#ecebe6;--dim:#9aa0a0;--ok:#4cc77b;--bad:#ef5b47}
+*{box-sizing:border-box}html{background:#0d0f10;min-height:100%}body{min-height:100vh}html,body{margin:0;background:radial-gradient(circle at 50% -20%,#2a2213,#0d0f10 60%) fixed;color:var(--txt);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:18px 14px 60px}
+h1{font:800 22px/1.2 Georgia,serif;letter-spacing:1px;margin:4px 0 2px;color:var(--gold2);text-align:center}
+.sub{text-align:center;color:var(--dim);font-size:13px;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.card h2{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold)}
+label{display:block;font-size:12px;color:var(--dim);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.8px}
+input,select,textarea{width:100%;background:#0f1112;color:var(--txt);border:1px solid #34383a;border-radius:10px;padding:11px 12px;font:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{resize:vertical;min-height:70px}
+.row{display:flex;gap:8px;align-items:center}.row>*{min-width:0}
+button{font:700 15px system-ui,sans-serif;border-radius:10px;border:1px solid #6b5420;background:linear-gradient(180deg,#3a3122,#231d14);color:var(--gold2);padding:11px 14px;cursor:pointer}
+button.gold{background:linear-gradient(180deg,#f6d77c,#d99a22);color:#1c1204;border-color:#f6d77c}
+button.big{width:100%;padding:14px;font-size:17px;margin-top:14px}
+button.sm{padding:6px 10px;font-size:13px}
+button.red{border-color:#7a2a20;background:linear-gradient(180deg,#4a1f1a,#2a1210);color:#ffb3a6}
+button:disabled{opacity:.45;cursor:default}
+.msg{margin-top:10px;font-size:14px;min-height:1em}.ok{color:var(--ok)}.bad{color:var(--bad)}.dim{color:var(--dim)}
+.pl{display:flex;gap:12px;align-items:center;padding:10px;border:1px solid #3a3a2a;border-radius:12px;background:#121412;margin-top:10px}
+.pl .lv{background:#262a2c;border:1px solid #444;border-radius:8px;padding:2px 8px;font-weight:800;font-size:13px}
+.pl b{font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{padding:7px 11px;border-radius:20px;border:1px solid #4a4128;background:#1d1a12;color:var(--gold2);font-size:13px;font-weight:600}
+.hist{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.hi{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#111314}
+.hi .t{display:flex;justify-content:space-between;gap:8px}
+.tag{font-size:11px;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.5px;white-space:nowrap}
+.tag.y{background:#1f3a27;color:#7ff0a3}.tag.n{background:#3a301a;color:#ffd37a}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+.res{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.res button{text-align:left;font-weight:600;color:var(--txt)}
+.lock{text-align:center;padding:26px 10px}
+.prev{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:13px;color:var(--dim)}
+.prev img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.tabs{display:flex;gap:6px;margin:12px 0 4px}.tabs button{flex:1;padding:10px 6px;font-size:14px}.tabs button.on{background:linear-gradient(180deg,#f6d77c,#d99a22);color:#1c1204;border-color:#f6d77c}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}.tbl th{text-align:left;color:var(--dim);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.6px;padding:6px 4px;border-bottom:1px solid var(--line)}.tbl td{padding:8px 4px;border-bottom:1px solid #222527;vertical-align:top}.tbl td b{color:var(--txt)}.gain{color:var(--ok);font-weight:800}.zero{color:var(--dim)}.idc{color:var(--gold2);font-weight:700;font-size:12px}
+.sum{display:flex;gap:8px;margin-top:10px}.sum div{flex:1;background:#111314;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}.sum b{display:block;font-size:19px;color:var(--gold2)}.sum small{color:var(--dim);font-size:11px}
+.prev img.bn{width:110px;height:28px;border-radius:5px}
+</style></head><body><div class="wrap">
+<h1>COMANDO SUPREMO</h1><div class="sub">Painel de Compras · entregar itens aos jogadores</div>
+<div id="app"><div class="card lock"><p class="dim">Carregando…</p></div></div>
+</div>
+<script src="firebase-config.js"></script>
+<script type="module">
+const ADMIN='andrehenzique22@gmail.com';
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RAR={c:'Comum',i:'Incomum',r:'Raro',e:'Épico',l:'Lendário',m:'Místico'};
+const BASE=[
+ ['Pacotes e itens',[['med','Medalhas (escolha a quantidade)'],['salva','Salve-me'],['salva5','Salve-me ×5'],['tesouro','Tesouro de guerra'],['escudo','Escudo antimíssil'],['tech','Pacote de tecnologia'],['arsenal','Arsenal pronto'],['ditador','Pacote Ditador Completo']]],
+ ['Avatares',[['av_urso','Avatar Urso Polar · Lendário'],['av_aguia','Avatar Águia · Raro'],['av_cobra','Avatar Cobra Fumou · Incomum'],['av_dragao','Avatar Dragão · Épico'],['av_oni','Avatar Oni Dourado · Lendário'],['av_onineon','Avatar Oni Neon · Místico']]],
+ ['Banners',[['bn_general','Banner General Mascarado · Épico'],['bn_urso','Banner Caçada Polar · Lendário'],['bn_eua','Banner Asas da Liberdade · Místico'],['bn_arcoiris','Banner Arco-íris Metálico · Incomum'],['bn_guerra','Banner Linha de Frente · Comum'],['bn_templo','Banner Templo Carmesim · Lendário'],['bn_neon','Banner Cidade Neon · Místico'],['bn_fuji','Banner Monte Sakura · Lendário'],['bn_nuvens','Banner Acima das Nuvens · Épico']]],
+ ['Skins',[['skin_su57_dark','Skin Su-57 Escuro'],['skin_su57_tri','Skin Su-57 Tricolor'],['skin_t90_red','Skin T-90M Vermelho'],['skin_t90_black','Skin T-90M Preto'],['skin_t90_snow','Skin T-90M Neve'],['skin_abrams_desert','Skin Abrams Deserto'],['skin_abrams_red','Skin Abrams Vermelho']]]];
+const QUICK=[['med',100],['med',500],['med',1000],['med',5000],['salva5',1],['ditador',1]];
+let api=null,user=null,CFG={},RANK=null,P=null,NAMES={},TAB='ent',PER='24h';
+
+async function init(){const cfg=window.FIREBASE_CONFIG;if(!cfg){$('#app').innerHTML='<div class="card lock"><p class="bad">Arquivo firebase-config.js não encontrado.</p><p class="dim">Este painel precisa ficar na mesma pasta do jogo no GitHub.</p></div>';return}
+ if(cfg==='mock')api=mock();else{const B='https://www.gstatic.com/firebasejs/10.12.2/';const[A,Db,Au]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-database.js'),import(B+'firebase-auth.js')]);
+  const app=A.initializeApp(cfg,'painel'),d=Db.getDatabase(app),au=Au.getAuth(app),R=p=>Db.ref(d,p);
+  api={login:async()=>(await Au.signInWithPopup(au,new Au.GoogleAuthProvider())).user,out:()=>Au.signOut(au),cur:()=>au.currentUser,
+   get:async p=>(await Db.get(R(p))).val(),push:(p,v)=>Db.push(R(p),v),remove:p=>Db.remove(R(p)),ts:()=>Db.serverTimestamp(),
+   top:async(p,c,n)=>(await Db.get(Db.query(R(p),Db.orderByChild(c),Db.limitToLast(n)))).val(),
+   range:async(p,c,a,b)=>(await Db.get(Db.query(R(p),Db.orderByChild(c),Db.startAt(a),Db.endAt(b)))).val()};
+  await new Promise(r=>{const u=Au.onAuthStateChanged(au,()=>{u();r()})})}
+ user=api.cur();render()}
+
+function isAdm(){return user&&user.email===ADMIN&&user.emailVerified!==false}
+function render(){
+ if(!user){$('#app').innerHTML=`<div class="card lock"><p>Entre com a sua conta Google de dono para usar o painel.</p><button class="gold big" id="blog">Entrar com Google</button><p id="lo" class="msg"></p></div>`;$('#blog').onclick=doLogin;return}
+ if(!isAdm()){$('#app').innerHTML=`<div class="card lock"><p class="bad"><b>Acesso negado.</b></p><p class="dim">Este painel é só do dono do jogo.</p><button id="bout">Sair</button></div>`;$('#bout').onclick=async()=>{await api.out();user=null;render()};return}
+ $('#app').innerHTML=`
+ <div class="top"><span class="dim">Conectado: <b style="color:var(--txt)">${esc(user.email)}</b></span><button class="sm" id="bout">Sair</button></div>
+ <div class="tabs"><button data-tab="ent" class="${TAB==='ent'?'on':''}">Entregar</button><button data-tab="log" class="${TAB==='log'?'on':''}">Logins</button><button data-tab="res" class="${TAB==='res'?'on':''}">Resgates</button></div>
+ <div id="tlog"></div>
+ <div id="tent" ${TAB==='ent'?'':'hidden'}>
+ <div class="card"><h2>1 · Jogador</h2>
+  <label for="q">ID do jogador (CS…), UID ou nome</label>
+  <div class="row"><input id="q" placeholder="Ex.: 00248213" autocomplete="off"><button class="gold" id="bq">Buscar</button></div>
+  <div id="pres"></div></div>
+ <div class="card"><h2>2 · Item comprado</h2>
+  <div class="chips">${QUICK.map(([k,q],i)=>`<button class="chip" data-qi="${i}">${esc(qName(k,q))}</button>`).join('')}</div>
+  <label for="it">Item</label><select id="it"></select>
+  <div id="iprev"></div>
+  <label for="qq">Quantidade</label><input id="qq" type="number" min="1" value="1">
+  <label for="tt">Título da mensagem</label><input id="tt" maxlength="60" value="Sua compra chegou!">
+  <label for="bb">Mensagem</label><textarea id="bb" maxlength="800">Obrigado pela compra, comandante! Toque em Resgatar presente para receber o seu item.</textarea>
+  <label for="ff">Quem envia</label><input id="ff" maxlength="24" value="Comando Supremo">
+  <button class="gold big" id="bsend" disabled>Enviar para o jogador</button><p id="so" class="msg"></p></div>
+ <div class="card"><h2>3 · Entregas para este jogador</h2><div id="hist"><p class="dim">Busque um jogador para ver as entregas.</p></div></div></div>`;
+ document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('on',x===b));$('#tent').hidden=TAB!=='ent';logView()});logView();
+ $('#bout').onclick=async()=>{await api.out();user=null;render()};
+ $('#bq').onclick=find;$('#q').onkeydown=e=>{if(e.key==='Enter')find()};
+ $('#bsend').onclick=send;$('#it').onchange=prev;
+ document.querySelectorAll('[data-qi]').forEach(b=>b.onclick=()=>{const[k,q]=QUICK[+b.dataset.qi];$('#it').value=k;$('#qq').value=q;prev()});
+ loadItems()}
+
+async function doLogin(){try{user=await api.login();render()}catch(e){$('#lo').className='msg bad';$('#lo').textContent='Não foi possível entrar: '+(e.code||e.message||e)}}
+
+async function loadItems(){try{CFG=(await api.get('cfg/items'))||{}}catch(e){CFG={}}
+ const groups=BASE.map(([g,l])=>[g,l.slice()]);const cu=[];
+ Object.entries(CFG).forEach(([id,o])=>{if(!o||typeof o!=='object')return;const k=o.t==='av'?'av_x'+id:o.t==='bn'?'bn_x'+id:o.t==='med'?'xm'+id:'xs'+id;
+  const n=o.t==='av'?'Avatar '+o.n:o.t==='bn'?'Banner '+o.n:o.t==='med'?(o.q|0)+' medalhas':'Salve-me ×'+(o.q|0);cu.push([k,n+((o.t==='av'||o.t==='bn')?' · '+(RAR[o.r]||'Comum'):'')+' (painel)'])});
+ if(cu.length)groups.push(['Itens publicados no painel',cu]);
+ NAMES={};groups.forEach(([,l])=>l.forEach(([k,n])=>NAMES[k]=n));
+ $('#it').innerHTML=groups.map(([g,l])=>`<optgroup label="${esc(g)}">${l.map(([k,n])=>`<option value="${esc(k)}">${esc(n)}</option>`).join('')}</optgroup>`).join('');prev()}
+
+function xOf(k){const m=/^(av_x|bn_x|xm|xs)(.+)$/.exec(k);return m?CFG[m[2]]:null}
+function qName(k,q){if(k==='med')return q+' medalhas';const n=(NAMES[k]||{salva5:'Salve-me ×5',ditador:'Pacote Ditador'}[k]||k).replace(/ · .*$/,'').replace(/ \(.*\)$/,'').replace(' (escolha a quantidade)','');return n+(q>1?' ×'+q:'')}
+function prev(){const k=$('#it').value,o=xOf(k),perm=/^(av_|bn_|skin_)|^ditador$/.test(k);
+ $('#qq').disabled=perm;if(perm)$('#qq').value=1;
+ $('#iprev').innerHTML=o&&o.img?`<div class="prev"><img class="${o.t==='bn'?'bn':''}" src="${o.img}" alt="">${esc(o.n||'')}</div>`:perm?'<div class="prev">Item permanente: quantidade sempre 1.</div>':''}
+
+async function find(){const q=$('#q').value.trim(),o=$('#pres');if(!q)return;o.innerHTML='<p class="dim">Buscando…</p>';P=null;$('#bsend').disabled=true;
+ try{let hit=[];
+  if(/^(CS[A-Z0-9]{6}|\d{7,9})$/i.test(q)){const id=q.toUpperCase();RANK=RANK||(await api.get('rank'))||{};const f=Object.entries(RANK).find(([u,v])=>(v&&v.id||'').toUpperCase()===id);hit=[f?Object.assign({u:f[0]},f[1]):{u:null,id,n:null}]}
+  else{let v=null;try{v=await api.get('rank/'+q)}catch(e){}
+   if(v&&v.id)hit=[Object.assign({u:q},v)];else{RANK=RANK||(await api.get('rank'))||{};const ql=q.toLowerCase();hit=Object.entries(RANK).filter(([u,x])=>x&&String(x.n||'').toLowerCase().includes(ql)).slice(0,10).map(([u,x])=>Object.assign({u},x))}}
+  if(!hit.length){o.innerHTML='<p class="bad msg">Nenhum jogador encontrado. Confira o ID (fica no Perfil do jogador).</p>';return}
+  if(hit.length>1){o.innerHTML=`<div class="res">${hit.map((h,i)=>`<button data-h="${i}">${esc(h.n||'Jogador')} · ${esc(h.id||'?')}${typeof h.lv==='number'?' · Nv '+h.lv:''}</button>`).join('')}</div>`;o.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>pick(hit[+b.dataset.h]));return}
+  pick(hit[0])}catch(e){o.innerHTML=`<p class="bad msg">Erro ao buscar: ${esc(e.code||e.message||e)}</p>`}}
+
+function pick(h){if(!h.id){$('#pres').innerHTML='<p class="bad msg">Esse jogador ainda não tem ID salvo. Peça o ID que aparece no Perfil dele (CS…).</p>';return}
+ P=h;$('#pres').innerHTML=`<div class="pl"><div style="flex:1"><b>${h.n?esc(h.n):'<span class="dim">Jogador (sem nome no ranking)</span>'}</b><div class="dim" style="font-size:13px">ID <b style="color:var(--gold2)">${esc(h.id)}</b>${h.u?' · UID '+esc(h.u.slice(0,10))+'…':''}${typeof h.m==='number'?' · '+h.m+' medalhas':''}</div></div>${typeof h.lv==='number'?`<span class="lv">Nv ${h.lv}</span>`:''}</div>`;
+ $('#bsend').disabled=false;hist()}
+
+async function send(){const o=$('#so');if(!P||!P.id){o.className='msg bad';o.textContent='Escolha o jogador primeiro.';return}
+ const k=$('#it').value,perm=/^(av_|bn_|skin_)|^ditador$/.test(k),q=perm?1:Math.max(1,Math.min(100000,+$('#qq').value|0)),t=$('#tt').value.trim(),b=$('#bb').value.trim(),f=($('#ff').value.trim()||'Comando Supremo').slice(0,24);
+ if(!t||!b){o.className='msg bad';o.textContent='Escreva o título e a mensagem.';return}
+ if(!confirm(`Enviar ${qName(k,q)} para ${P.n||P.id} (${P.id})?`))return;
+ $('#bsend').disabled=true;o.className='msg dim';o.textContent='Enviando…';
+ try{await api.push('mail/to/'+P.id,{title:t.slice(0,60),body:b.slice(0,800),from:f+' ✔',code:null,give:{k,q},ts:api.ts()});
+  o.className='msg ok';o.textContent=`✅ Enviado! ${P.n||P.id} vai receber "${qName(k,q)}" no Correio do jogo.`;hist()}
+ catch(e){o.className='msg bad';o.textContent='Não foi possível enviar ('+(e.code||e.message||e)+'). Confira se as regras novas estão publicadas no Firebase.'}
+ $('#bsend').disabled=false}
+
+async function hist(){const el=$('#hist');if(!P)return;el.innerHTML='<p class="dim">Carregando…</p>';
+ try{const m=(await api.top('mail/to/'+P.id,'ts',25))||{},c=(await api.get('mailc/'+P.id))||{};const L=Object.entries(m).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  if(!L.length){el.innerHTML='<p class="dim">Nenhuma mensagem enviada para este jogador ainda.</p>';return}
+  el.innerHTML=`<div class="hist">${L.map(([id,x])=>{const got=!!c[id],g=x.give;return`<div class="hi"><div class="t"><b>${esc(g?qName(String(g.k),+g.q||1):x.title)}</b>${g?`<span class="tag ${got?'y':'n'}">${got?'RESGATADO':'AGUARDANDO'}</span>`:'<span class="tag n">MENSAGEM</span>'}</div><div class="dim" style="font-size:12px">${x.ts?new Date(x.ts).toLocaleString('pt-BR'):''}${got&&c[id].t?' · resgatou em '+new Date(c[id].t).toLocaleString('pt-BR'):''}</div>${!got?`<button class="sm red" style="margin-top:6px" data-del="${esc(id)}">Cancelar envio</button>`:''}</div>`}).join('')}</div>`;
+  el.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Cancelar este envio? O jogador não poderá mais resgatar.'))return;try{await api.remove('mail/to/'+P.id+'/'+b.dataset.del);hist()}catch(e){alert('Não foi possível cancelar: '+(e.code||e.message))}})}
+ catch(e){el.innerHTML=`<p class="bad">Erro ao carregar: ${esc(e.code||e.message||e)}</p>`}}
+
+const PERS=[['1h','Última hora'],['hoje','Hoje'],['24h','24 horas'],['7d','7 dias'],['30d','30 dias'],['cus','Escolher…']];
+const dt=t=>t?new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}):'—';
+const dur=ms=>{ms=Math.max(0,ms|0);const m=Math.round(ms/6e4);return m<60?m+' min':Math.floor(m/60)+'h'+String(m%60).padStart(2,'0')};
+const loc=t=>{const d=new Date(t-new Date(t).getTimezoneOffset()*6e4);return d.toISOString().slice(0,16)};
+function perRange(){const n=Date.now();if(PER==='1h')return[n-36e5,n];if(PER==='hoje'){const d=new Date();d.setHours(0,0,0,0);return[d.getTime(),n]}if(PER==='7d')return[n-7*864e5,n];if(PER==='30d')return[n-30*864e5,n];
+ if(PER==='cus'){const a=Date.parse(($('#pa')||{}).value||''),b=Date.parse(($('#pb')||{}).value||'');return[isNaN(a)?n-864e5:a,isNaN(b)?n:b]}return[n-864e5,n]}
+function logView(){const el=$('#tlog');if(TAB==='ent'){el.innerHTML='';return}const[a,b]=perRange();
+ el.innerHTML=`<div class="card"><h2>${TAB==='log'?'Logins e medalhas ganhas':'Itens resgatados do Correio'}</h2>
+  <label for="per">Período</label><select id="per">${PERS.map(([k,n])=>`<option value="${k}" ${PER===k?'selected':''}>${n}</option>`).join('')}</select>
+  <div id="pcus" ${PER==='cus'?'':'hidden'}><div class="row"><div style="flex:1"><label for="pa">De</label><input id="pa" type="datetime-local" value="${loc(a)}"></div><div style="flex:1"><label for="pb">Até</label><input id="pb" type="datetime-local" value="${loc(b)}"></div></div></div>
+  <label for="lf">Filtrar por ID ou nome (opcional)</label><div class="row"><input id="lf" placeholder="ID ou nome" value="${esc(LF)}"><button class="gold" id="lgo">Ver</button></div>
+  <div id="lout"><p class="dim">Carregando…</p></div></div>`;
+ $('#per').onchange=()=>{PER=$('#per').value;$('#pcus').hidden=PER!=='cus';logLoad()};$('#lgo').onclick=()=>{LF=$('#lf').value.trim();logLoad()};$('#lf').onkeydown=e=>{if(e.key==='Enter'){LF=$('#lf').value.trim();logLoad()}};logLoad()}
+let LF='';
+const fOk=x=>{if(!LF)return true;const q=LF.toLowerCase();return String(x.id||'').toLowerCase()===q||String(x.n||'').toLowerCase().includes(q)};
+async function logLoad(){const o=$('#lout');if(!o)return;const[a,b]=perRange();o.innerHTML='<p class="dim">Carregando…</p>';
+ try{if(TAB==='log'){const v=(await api.range('logs/login','t0',a,b))||{};const L=Object.values(v).filter(x=>x&&fOk(x)).sort((x,y)=>(y.t0||0)-(x.t0||0));
+   if(!L.length){o.innerHTML='<p class="dim" style="margin-top:10px">Nenhum login neste período.</p>';return}
+   const P2={};L.forEach(x=>{const k=x.id||x.u;const p=P2[k]=P2[k]||{n:x.n,id:x.id,s:0,g:0,last:0};p.s++;p.g+=Math.max(0,(x.m1||0)-(x.m0||0));p.last=Math.max(p.last,x.t1||x.t0||0);if(!p.n)p.n=x.n});
+   const PL=Object.values(P2).sort((x,y)=>y.g-x.g),tg=PL.reduce((s,p)=>s+p.g,0);
+   o.innerHTML=`<div class="sum"><div><b>${PL.length}</b><small>jogadores</small></div><div><b>${L.length}</b><small>logins</small></div><div><b>+${tg.toLocaleString('pt-BR')}</b><small>medalhas ganhas</small></div></div>
+   <h2 style="margin-top:14px">Por jogador</h2><table class="tbl"><tr><th>Jogador</th><th>Logins</th><th>Medalhas</th><th>Última vez</th></tr>${PL.map(p=>`<tr><td><b>${esc(p.n||'Jogador')}</b><br><span class="idc">${esc(p.id||'?')}</span></td><td>${p.s}</td><td class="${p.g?'gain':'zero'}">${p.g?'+'+p.g.toLocaleString('pt-BR'):'0'}</td><td>${dt(p.last)}</td></tr>`).join('')}</table>
+   <h2 style="margin-top:14px">Cada login</h2><table class="tbl"><tr><th>Jogador</th><th>Entrou</th><th>Tempo</th><th>Medalhas</th></tr>${L.slice(0,300).map(x=>{const g=Math.max(0,(x.m1||0)-(x.m0||0));return`<tr><td><b>${esc(x.n||'Jogador')}</b><br><span class="idc">${esc(x.id||'?')}</span>${x.g?' <small class="dim">Google</small>':''}</td><td>${dt(x.t0)}</td><td>${dur((x.t1||x.t0)-x.t0)}</td><td class="${g?'gain':'zero'}">${g?'+'+g.toLocaleString('pt-BR'):'0'}<br><small class="dim">${(x.m0||0).toLocaleString('pt-BR')}→${(x.m1||0).toLocaleString('pt-BR')}</small></td></tr>`}).join('')}</table>`}
+  else{const v=(await api.range('logs/claim','t',a,b))||{};const L=Object.values(v).filter(x=>x&&fOk(x)).sort((x,y)=>(y.t||0)-(x.t||0));
+   if(!L.length){o.innerHTML='<p class="dim" style="margin-top:10px">Nenhum item resgatado neste período.</p>';return}
+   o.innerHTML=`<div class="sum"><div><b>${L.length}</b><small>itens resgatados</small></div><div><b>${new Set(L.map(x=>x.id)).size}</b><small>jogadores</small></div></div>
+   <table class="tbl"><tr><th>Jogador</th><th>Item</th><th>Caiu na conta</th></tr>${L.slice(0,300).map(x=>`<tr><td><b>${esc(x.n||'Jogador')}</b><br><span class="idc">${esc(x.id||'?')}</span></td><td><b>${esc(x.nm||x.k)}</b></td><td>${x.t?new Date(x.t).toLocaleDateString('pt-BR'):'—'}<br><b>${x.t?new Date(x.t).toLocaleTimeString('pt-BR'):''}</b></td></tr>`).join('')}</table>`}}
+ catch(e){o.innerHTML=`<p class="bad msg">Não foi possível carregar (${esc(e.code||e.message||e)}). Publique as regras novas do Firebase.</p>`}}
+function mock(){const K='csmock:db',read=()=>JSON.parse(localStorage.getItem(K)||'{}'),write=o=>localStorage.setItem(K,JSON.stringify(o)),ps=p=>p.split('/').filter(Boolean),g=(o,p)=>ps(p).reduce((a,k)=>a==null?undefined:a[k],o),
+ s=(o,p,v)=>{const k=ps(p);let a=o;for(let i=0;i<k.length-1;i++){if(!a[k[i]]||typeof a[k[i]]!=='object')a[k[i]]={};a=a[k[i]]}if(v==null)delete a[k[k.length-1]];else a[k[k.length-1]]=v};let n=0,u=null;
+ return{login:async()=>u={uid:'admmock',email:/adm/.test(location.search)?ADMIN:'x@x.com',emailVerified:true},out:async()=>{u=null},cur:()=>u,get:async p=>g(read(),p)??null,
+  push:async(p,v)=>{const k=Date.now().toString(36)+(n++);const o=read();s(o,p+'/'+k,JSON.parse(JSON.stringify(v)));write(o);return{key:k}},remove:async p=>{const o=read();s(o,p,null);write(o)},ts:()=>Date.now(),
+  top:async p=>g(read(),p)??null,range:async(p,c,a,b)=>{const o=g(read(),p)||{},r={};Object.entries(o).forEach(([k,v])=>{if(v&&v[c]>=a&&v[c]<=b)r[k]=v});return r}}}
+init();
+</script></body></html>
