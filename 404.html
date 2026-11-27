@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#05080a">
+<meta name="robots" content="noindex">
+<title>Comando Supremo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:#05080a;color:#e8e2d0;font-family:"IBM Plex Sans",system-ui,sans-serif}
+body{display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 38%,#12303a 0%,#071217 45%,#030506 100%)}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.75) 100%)}
+.w{position:relative;z-index:2;width:min(92vw,420px);text-align:center;padding:24px 8px}
+.emb{width:120px;height:120px;margin:0 auto 6px;filter:drop-shadow(0 0 22px rgba(233,185,73,.45));animation:glow 3s ease-in-out infinite}
+@keyframes glow{50%{filter:drop-shadow(0 0 36px rgba(255,210,110,.75))}}
+h1{font:900 clamp(40px,12vw,58px)/.95 "Cinzel",Georgia,serif;letter-spacing:1px;background:linear-gradient(180deg,#fff1c4 0%,#f2c766 38%,#b98428 70%,#7a5418 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.6))}
+h1 span{display:block}
+.sub{margin:12px 0 26px;font:600 11px "IBM Plex Sans",sans-serif;letter-spacing:2.6px;white-space:nowrap;color:#9fb6bd;display:flex;align-items:center;gap:10px;justify-content:center}
+.sub:before,.sub:after{content:"";height:1px;width:22px;flex:none;background:linear-gradient(90deg,transparent,#d9a441)}.sub:after{transform:scaleX(-1)}
+.msg{display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 14px "IBM Plex Sans",sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:#f0d99a;margin-bottom:8px;min-height:22px}
+.msg b{transition:opacity .35s}.msg i{font-style:normal;color:#f2c766;font-variant-numeric:tabular-nums}
+.bar{position:relative;height:14px;border-radius:9px;background:#0c1418;border:1px solid #5d4a1f;box-shadow:inset 0 2px 6px rgba(0,0,0,.8);overflow:hidden}
+.bar>s{position:absolute;inset:0 auto 0 0;width:0;border-radius:9px;background:linear-gradient(90deg,#8a5f1c,#e2b04f 60%,#ffe6a3);box-shadow:0 0 14px rgba(242,199,102,.65);transition:width .5s ease}
+.bar>s:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);background-size:220% 100%;animation:sh 1.4s linear infinite}
+@keyframes sh{from{background-position:120% 0}to{background-position:-120% 0}}
+.segs{display:flex;gap:6px;justify-content:center;margin-top:12px}.segs u{width:30px;height:4px;border-radius:2px;background:#24323a;transition:background .3s}.segs u.on{background:#e2b04f;box-shadow:0 0 8px #e2b04f}
+.box{margin-top:22px;padding:12px 14px;border-radius:10px;border:1px solid #5d4a1f;background:rgba(10,16,19,.75);font-size:13.5px;line-height:1.45;color:#c9c2ad}
+.box b{color:#f2c766}
+.ret{margin-top:12px;font-size:12px;color:#7d8f95;display:flex;align-items:center;justify-content:center;gap:6px}
+.ret svg{animation:sp 1.2s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+#up{display:none}
+.ui{width:96px;height:96px;margin:0 auto 10px;filter:drop-shadow(0 0 24px rgba(242,199,102,.6));animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+h2{font:900 clamp(30px,9vw,40px)/1.05 "Cinzel",Georgia,serif;color:#f6d98a;text-shadow:0 0 18px rgba(242,199,102,.5);margin-bottom:10px}
+.ver{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border-radius:999px;border:1px solid #5d4a1f;background:#0b1316;font:700 14px "IBM Plex Sans",sans-serif;color:#f2c766;margin:6px 0 22px}
+.btn{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:68px;border-radius:12px;border:2px solid #c99a3c;background:linear-gradient(180deg,#3a2c12,#1a140a);color:#ffe6a3;font:900 20px "Cinzel",Georgia,serif;letter-spacing:1px;cursor:pointer;box-shadow:0 0 26px rgba(242,199,102,.35),inset 0 1px 0 rgba(255,230,163,.25);animation:pul 1.8s ease-in-out infinite}
+.btn:active{transform:scale(.97)}@keyframes pul{50%{box-shadow:0 0 40px rgba(242,199,102,.65),inset 0 1px 0 rgba(255,230,163,.25)}}
+.btn small{display:block;font:600 12px "IBM Plex Sans",sans-serif;letter-spacing:.5px;color:#c9b27a}
+.note{margin-top:14px;font-size:12.5px;color:#7d8f95}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas><div class="vig"></div>
+<main class="w">
+ <svg class="emb" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6a3"/><stop offset=".5" stop-color="#d9a441"/><stop offset="1" stop-color="#8a5f1c"/></linearGradient><linearGradient id="es" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2f37"/><stop offset="1" stop-color="#0a1418"/></linearGradient></defs>
+  <g fill="none" stroke="url(#eg)" stroke-width="3" stroke-linecap="round"><path d="M30 92q-9 -4 -8 -12"/><path d="M90 92q9 -4 8 -12"/><path d="M28.5 81q-9 -4 -8 -12"/><path d="M91.5 81q9 -4 8 -12"/><path d="M27 70q-9 -4 -8 -12"/><path d="M93 70q9 -4 8 -12"/><path d="M25.5 59q-9 -4 -8 -12"/><path d="M94.5 59q9 -4 8 -12"/><path d="M24 48q-9 -4 -8 -12"/><path d="M96 48q9 -4 8 -12"/><path d="M30 94q30 18 60 0"/></g>
+  <path d="M60 14 92 26v28c0 22-14 36-32 44-18-8-32-22-32-44V26z" fill="url(#es)" stroke="url(#eg)" stroke-width="3.5"/>
+  <path d="M60 34l6.2 12.6 13.8 2-10 9.8 2.4 13.8L60 65.7l-12.4 6.5 2.4-13.8-10-9.8 13.8-2z" fill="url(#eg)"/><path d="M42 82h36" stroke="url(#eg)" stroke-width="2.5"/></svg>
+ <h1><span>COMANDO</span><span>SUPREMO</span></h1>
+ <p class="sub">SIMULADOR DE GEOPOLÍTICA E GUERRA</p>
+
+ <section id="load">
+  <div class="msg"><b id="txt">Tentando conectar…</b><i id="pc">0%</i></div>
+  <div class="bar"><s id="fill"></s></div>
+  <div class="segs" id="segs"><u></u><u></u><u></u><u></u><u></u></div>
+  <div class="box">O <b>QG está em manutenção</b> ou recebendo uma nova versão. Fique nesta tela: assim que o jogo voltar, ela avisa sozinha.</div>
+  <p class="ret"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e2b04f" stroke-width="2.6" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><span id="tries">Verificando o servidor…</span></p>
+ </section>
+
+ <section id="up">
+  <svg class="ui" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="ug" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="92"><stop offset="0" stop-color="#ffe6a3"/><stop offset="1" stop-color="#b98428"/></linearGradient></defs>
+   <circle cx="48" cy="48" r="44" fill="#0b1316" stroke="url(#ug)" stroke-width="3"/><circle cx="48" cy="48" r="36" fill="none" stroke="#5d4a1f" stroke-width="1.5" stroke-dasharray="3 5"/>
+   <path d="M48 24v34" stroke="url(#ug)" stroke-width="7" stroke-linecap="round"/><path d="M33 45l15 15 15-15" fill="none" stroke="url(#ug)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 70h36" stroke="url(#ug)" stroke-width="5" stroke-linecap="round"/></svg>
+  <h2>ATUALIZAÇÃO<br>DISPONÍVEL</h2>
+  <div class="ver" id="ver">Nova versão</div>
+  <button class="btn" id="go"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffe6a3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg><span>ATUALIZAR VERSÃO<small>Leva só alguns segundos</small></span></button>
+  <p class="note">Seu progresso, medalhas e itens ficam salvos.</p>
+ </section>
+</main>
+<script>
+(function(){
+var BASE='/comando-supremo/';
+var MSG=['Tentando conectar…','Checando atualização…','Ajustando…','Construindo…','Confirmando a entrada…'];
+var txt=document.getElementById('txt'),fill=document.getElementById('fill'),pc=document.getElementById('pc'),segs=document.querySelectorAll('#segs u'),tries=document.getElementById('tries');
+var step=0,p=0,done=false,n=0;
+function tick(){if(done)return;p+=Math.random()*3.2+1.2;var lim=(step+1)*20;if(p>lim){p=lim;step++;if(step>=MSG.length){step=0;p=0;segs.forEach(function(s){s.classList.remove('on')})}txt.style.opacity=0;setTimeout(function(){txt.textContent=MSG[step];txt.style.opacity=1},300)}
+ segs.forEach(function(s,i){s.classList.toggle('on',i<step||(i===step&&p>step*20+10))});fill.style.width=Math.min(99,p)+'%';pc.textContent=Math.floor(Math.min(99,p))+'%'}
+setInterval(tick,260);
+function ok(r){return r&&r.ok}
+function check(){if(done)return;n++;tries.textContent='Tentativa '+n+' · verificando o servidor…';
+ fetch(BASE+'version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!ok(r))throw 0;return r.json()}).then(function(j){
+  return fetch(BASE+'?t='+Date.now(),{cache:'no-store'}).then(function(r2){if(!ok(r2))throw 0;var t=r2.headers.get('content-type')||'';return r2.text().then(function(h){if(h.indexOf('COMANDO')<0&&h.indexOf('Comando')<0)throw 0;show(j&&j.v)})})
+ }).catch(function(){tries.textContent='Tentativa '+n+' · o jogo ainda está voltando…';setTimeout(check,6000)})}
+function show(v){done=true;fill.style.width='100%';pc.textContent='100%';txt.textContent='Conectado!';segs.forEach(function(s){s.classList.add('on')});
+ setTimeout(function(){document.getElementById('load').style.display='none';var u=document.getElementById('up');u.style.display='block';document.getElementById('ver').textContent=v?('Versão '+v):'Nova versão'},700);
+ document.getElementById('go').onclick=function(){this.disabled=true;location.replace(BASE+(v?('?v='+encodeURIComponent(v)):''))}}
+setTimeout(check,1500);
+addEventListener('online',function(){if(!done)check()});
+/* partículas douradas */
+var c=document.getElementById('fx'),x=c.getContext('2d'),W,H,P=[];
+function rs(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio}rs();addEventListener('resize',rs);
+for(var i=0;i<46;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.4,v:Math.random()*.0012+.0004,a:Math.random()});
+(function loop(){x.clearRect(0,0,W,H);P.forEach(function(q){q.y-=q.v;if(q.y<-.02){q.y=1.02;q.x=Math.random()}q.a+=.02;var al=.35+.35*Math.sin(q.a);x.beginPath();x.arc(q.x*W,q.y*H,q.r*devicePixelRatio,0,7);x.fillStyle='rgba(242,199,102,'+al+')';x.fill()});requestAnimationFrame(loop)})();
+})();
+</script>
+</body>
+</html>
